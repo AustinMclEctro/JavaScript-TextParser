@@ -4,24 +4,9 @@ Assignment 2
 By Austin Sullivan
 */
 
-let splitTokens = [];
+let validTokens = /^([a-zA-Z0-9]+)$/;   // run regex on this
 
 function getStats(txt) {
-
-    // Establish array of tokens to split words upon if we haven't already
-    if(splitTokens.length === 0)
-    {
-        console.log("Establishing splitTokens array...");
-        (function()
-        {
-            let splitTokenStr = " .,!?:;-@#$%^&*()_=+/><|`~[]{}" + '"' + "'" + "\n\r" + "	" + "\\";
-            for(let i = 0; i < splitTokenStr.length; i++)
-            {
-                 splitTokens.push(splitTokenStr.charAt(i));
-            }
-            return splitTokens;
-        })();
-    }
     
     // Initialize most of the parts to return
     let nChars = txt.length;
@@ -54,7 +39,7 @@ function getStats(txt) {
         }
         else
         {
-            line += txt.charAt(i);  
+            line += txt.charAt(i);
         }
 
         // Check line content
@@ -64,7 +49,7 @@ function getStats(txt) {
         }
         
         // Check for a token we should split on to find words
-        if(splitTokens.includes(txt.charAt(i)))
+        if(!validTokens.test(txt.charAt(i)))
         {
             if(nextWord !== "")
             {
